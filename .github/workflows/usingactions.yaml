@@ -3,14 +3,23 @@ on: push
 jobs:
     build:
         runs-on: ubuntu-latest
-
-        defaults:
-          run:
-            working-directory: using-actions/react-app
-
         steps:
          - name: checkout the code
            uses: actions/checkout@v4
+
+         - name: Show repo structure
+           run: ls -R
+
+         - name: Setup Node
+           uses: actions/setup-node@v3
+           with:
+            node-version: '20.x'
+
+         - name: Show react-app contents
+           run: ls -la
+           working-directory: using-actions/react-app
+
          - name: install dependencies
            run: npm ci
+           working-directory: using-actions/react-app
         
