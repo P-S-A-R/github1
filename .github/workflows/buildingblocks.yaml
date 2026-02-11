@@ -1,0 +1,14 @@
+name: building blocks
+on: push
+jobs:
+    morning:
+        runs-on: ubuntu-latest
+        steps:
+         - name: say hello
+           run: echo "hello from avinash"
+    afternoon:
+        runs-on: ubuntu-latest
+        steps:
+         - name: say bye
+           run: echo good bye""
+    
