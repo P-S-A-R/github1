@@ -22,7 +22,7 @@ jobs:
          - name: check node and npm version
            run: |
             node -v
-            npm-v
+            npm -v
         
 
          - name: install dependencies
