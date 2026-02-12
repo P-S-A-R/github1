@@ -2,9 +2,15 @@ name: contexts
 on: 
     push:
     workflow_dispatch:
+env:
+    MY_WORKFLOW_VAR: "workflow"
+    MY_OVERWRITTEN_VAR : " workflow"
 jobs:
     echo-data:
         runs-on: ubuntu-latest
+        env: 
+             MY_WORKFLOW_VAR: "job"
+             MY_OVERWRITTEN_VAR : " job"
         steps:
          - name: display information
            run: |
@@ -18,3 +24,13 @@ jobs:
          - name: retrieve variables
            run: |
              echo "variable value: ${{ vars.MY_VAR }}"
+         - name: print env variables
+           env:
+             MY_OVERWRITTEN_VAR: "step"
+           run: |
+             echo "workflow env : ${{ env.MY_WORKFLOW_VAR }}"
+             echo "Overwriiten env : ${{ env.MY_WORKFLOW_VAR }}"
+         - name: print env variables
+           run: |
+             echo "workflow env : ${{ env.MY_WORKFLOW_VAR }}"
+             echo "Overwriiten env : ${{ env.MY_WORKFLOW_VAR }}"
