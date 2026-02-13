@@ -1,0 +1,53 @@
+name: execution flow
+on:
+    push:
+    workflow_dispatch:
+        inputs:
+            pass-unit-tests:
+                type: boolean
+                description: wether unit tests will pass or not
+                default: true
+jobs:
+    lint-build:
+        runs-on: ubuntu-latest
+        steps:
+         - name: Lint and build
+           run: echo "linting and building project"
+    unit-test:
+        runs-on: ubuntu-latest
+        steps:
+         - name: running unit tests
+           run: echo "running unit tests"
+         - name: failing tests
+           if: ${{ !inputs.pass-unit-tests }}
+           run: exit 1
+    deploy-nonprod:
+        runs-on: ubuntu-latest
+        needs: 
+            - lint-build
+            - unit-test
+        steps:
+         - name: deploying to non prod
+           run: echo "Deploying to nonprod"
+    e2e-tests:
+        runs-on: ubuntu-latest
+        needs:
+            - deploy-nonprod
+        steps:
+         - name: running e2e tests
+           run: echo "running e2e tests"
+    deploy-prod:
+        runs-on: ubuntu-lates
+        needs:
+            - deploy-nonprod
+        steps:
+        - name: deploying prod
+          run: echo "deploying"
+    load-test:
+        runs-on: ubuntu-latest
+        needs:
+            - e2e-tests
+            - deploy-prod
+        steps:
+         - name: loading
+           run: echo "loading successfull"
