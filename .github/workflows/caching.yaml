@@ -48,7 +48,7 @@ jobs:
      needs: install-deps
      defaults:
       run:
-        working-directory: 13-caching/react-app
+        working-directory: cachingreact/react-app
      steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -60,7 +60,7 @@ jobs:
         uses: actions/cache@v3
         id: cache
         with:
-          path: 13-caching/react-app/node_modules
+          path: cachingreact/react-app/node_modules
           key: ${{ needs.install-deps.outputs.deps-cache-key }}
       - name: Testing
         run: npm run test
