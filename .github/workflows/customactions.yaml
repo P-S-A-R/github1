@@ -1,6 +1,14 @@
 name: custom actions
+run-name: composte actions workflow run at ${{ github.event.workflow_dispatch.inputs.target-env }} environment
 on:
     workflow_dispatch:
+        inputs:
+            target-env:
+                description: "dev" or "prod" or "int" controls wether dev dependencies are installed
+                type: choice
+                options:
+                    - dev
+                    - prod
 
 env:
     working-directory: react/react-app
@@ -17,6 +25,7 @@ jobs:
               with:
                 node-version: 20.x
                 working-dir: ${{ env.working-directory}}
+                target-env: ${{ inputs.target-env}}
             - name: Test
               run: npm run test
         

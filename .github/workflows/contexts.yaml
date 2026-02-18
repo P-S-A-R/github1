@@ -1,6 +1,5 @@
 name: contexts
 on: 
-    push:
     workflow_dispatch:
 env:
   MY_WORKFLOW_VAR: 'workflow'
