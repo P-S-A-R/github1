@@ -11,7 +11,7 @@ inputs:
   default: .
   required: false
  target-env:
-  description: "dev" or "prod" or "int" controls wether dev dependencies are installed
+  description: controlls dependencies installed, dev or prod
   default: dev
   required: false
 
